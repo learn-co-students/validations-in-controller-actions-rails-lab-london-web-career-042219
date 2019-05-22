@@ -7,9 +7,15 @@ class AuthorsController < ApplicationController
   end
 
   def create
-    @author = Author.create!(author_params)
+    @author = Author.new(author_params)
 
-    redirect_to author_path(@author)
+    respond_to do |format|
+      if @author.save
+        format.html { redirect_to author_path(@author), notice: 'Author Successfully created.' }
+      else
+        format.html { render :new }
+      end
+    end
   end
 
   private

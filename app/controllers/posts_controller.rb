@@ -8,9 +8,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.update(post_params)
-
-    redirect_to post_path(@post)
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to post_path(@post), notice: "Post Updated"}
+      else
+        format.html { render :edit}
+      end
+    end
   end
 
   private
