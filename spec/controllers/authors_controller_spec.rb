@@ -12,6 +12,7 @@ RSpec.describe AuthorsController do
   end
 
   describe "creating a valid author" do
+    Author.destroy_all
     let(:bro_found) { Author.find_by(name: "S. Bro") }
 
     before { post :create, params: { name: "S. Bro", email: "bro@sbahj.info" } }
