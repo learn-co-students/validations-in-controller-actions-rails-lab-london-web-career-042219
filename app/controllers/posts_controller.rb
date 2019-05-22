@@ -1,16 +1,23 @@
-class PostsController < ApplicationController
-  before_action :set_post!, only: [:show, :edit, :update]
+require 'pry'
 
-  def show
-  end
+class PostsController < ApplicationController
+  before_action :set_post!, only: %i[show edit update]
+
+  def show; end
+
+  # CREATE????
 
   def edit
+    set_post
   end
 
   def update
-    @post.update(post_params)
-
-    redirect_to post_path(@post)
+   # binding.pry
+    if @post.update(post_params)
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
   end
 
   private
